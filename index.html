@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Платформа Опросов</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="create-test-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <h2>Создание нового теста</h2>
+            <form id="create-test-form">
+                <div class="form-group">
+                    <label for="test-title">Название теста</label>
+                    <input type="text" id="test-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="test-description">Описание теста</label>
+                    <textarea id="test-description" required></textarea>
+                </div>
+                <div id="questions-container"></div>
+                <div class="form-buttons">
+                    <button type="button" id="add-question-btn" class="secondary-btn">Добавить вопрос</button>
+                    <button type="button" id="remove-question-btn" class="secondary-btn" disabled>Удалить последний вопрос</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="primary-btn">Создать тест</button>
+                    <button type="button" id="cancel-create-test" class="secondary-btn">Отмена</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="finish-test-modal" class="modal hidden">
+        <div class="modal-overlay">
+        <div class="modal-content">
+            <h2>Вы уверены, что хотите завершить тест?</h2>
+            <button type="button" id="confirm-finish-test" class="primary-btn">Завершить тест</button>
+            <button type="button" id="cancel-finish-test" class="secondary-btn">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <h3>Вопросы</h3>
+        <div id="questions-nav" class="questions-nav"></div>
+    </div>
+    <div class="container">
+        <div id="tests-screen" class="screen">
+            <div class="tests-header">
+                <h1>Платформа опросов</h1>
+                <button id="add-test-btn" class="primary-btn">
+                    <span class="plus-icon">+</span>
+                    Создать тест
+                </button>
+            </div>
+            <div class="tests-grid" id="tests-grid"></div>
+        </div>
+
+
+        <div id="quiz-screen" class="screen hidden">
+            <div class="quiz-header">
+                <div class="quiz-header-top">
+                    <h2 id="quiz-title"></h2>
+                    <button id="back-to-tests-btn" class="secondary-btn">Вернуться к тестам</button>
+                </div>
+            </div>
+            <div class="quiz-layout">
+                <div class="quiz-main">
+                    <div class="quiz-content">
+                        <div class="question-container">
+                            <h3 id="question-title"></h3>
+                            <div id="answers" class="answers-container"></div>
+                        </div>
+                        <div class="nav-buttons">
+                            <button id="prev-btn" class="nav-button"><span>←</span></button>
+                            <button id="next-btn" class="nav-button"><span>→</span></button>
+                        </div>
+                    </div>
+                    <button id="finish-btn" class="primary-btn">Завершить тест</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen hidden">
+            <div class="quiz-header">
+                <div class="quiz-header-top">
+                    <h2>Результаты теста</h2>
+                    <button class="tests-link secondary-btn">Вернуться к тестам</button>
+                </div>
+            </div>
+            <div id="score-container">
+                <div class="score-item">
+                    <span class="score-label">Правильные ответы:</span>
+                    <span id="correct-answers" class="score-value"></span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Неправильные ответы:</span>
+                    <span id="incorrect-answers" class="score-value"></span>
+                </div>
+                <div id="unanswered-container" class="score-item">
+                    <span class="score-label">Неотвеченные вопросы:</span>
+                    <span id="unanswered-questions" class="score-value"></span>
+                </div>
+            </div>
+            <button id="restart-btn" class="primary-btn">Пройти тест заново</button>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
