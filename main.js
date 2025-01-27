@@ -45,6 +45,7 @@ function loadTests() {
         
         if (!test.isDefault) {
             const deleteButton = document.createElement('button');
+            deleteButton.setAttribute('test-id', 'list-item-delete');
             deleteButton.className = 'delete-test-btn';
             deleteButton.innerHTML = '×';
             deleteButton.addEventListener('click', (e) => showDeleteConfirmation(test.id, e));
@@ -52,7 +53,7 @@ function loadTests() {
         }
 
         card.innerHTML += `
-            <h3>${test.title}</h3>
+            <h3 test-id="list-item-title">${test.title}</h3>
             <p>${test.description}</p>
             <div class="test-info">
                 <span>${test.questionsCount} вопросов</span>
@@ -108,6 +109,7 @@ function loadQuestions() {
 function loadCurrentQuestion() {
     const question = currentTest.questions[currentQuestion];
     const questionTitle = document.getElementById('question-title');
+    questionTitle.setAttribute('test-id', 'question');
     const answersContainer = document.getElementById('answers');
     
     questionTitle.textContent = `Вопрос ${currentQuestion + 1}: ${question.question}`;
@@ -115,6 +117,7 @@ function loadCurrentQuestion() {
     
     question.answers.forEach((answer, index) => {
         const button = document.createElement('button');
+        button.setAttribute('test-id', 'question-option');
         button.className = 'answer-btn';
         button.textContent = answer;
         if (userAnswers[currentQuestion]){
@@ -159,8 +162,9 @@ function loadQuestionsNav() {
     
     currentTest.questions.forEach((question, index) => {
         const button = document.createElement('button');
-        button.className = 'question-nav-item';
-        if (index === currentQuestion) {
+            button.className = 'question-nav-item';
+            button.setAttribute('test-id', 'navigation-item');
+            if (index === currentQuestion) {
             button.classList.add('active');
         }
         
@@ -268,12 +272,12 @@ function addQuestion() {
             <span class="question-number">Вопрос ${questionNumber}</span>
         </div>
         <div class="form-group">
-            <input type="text" class="question-input" placeholder="Введите вопрос" required>
+            <input type="text" class="question-input" placeholder="Введите вопрос" required test-id="new-test-question">
             <div class="error-message"></div>
         </div>
-        <div class="answers-grid">
+        <div class="answers-grid" test-id="new-test-options">
             ${Array(4).fill(0).map((_, i) => `
-                <div class="answer-option">
+                <div class="answer-option"">
                     <input type="radio" name="correct-${questionNumber}" value="${i}" required>
                     <input type="text" class="answer-input" placeholder="Вариант ответа ${i + 1}" required>
                 </div>
